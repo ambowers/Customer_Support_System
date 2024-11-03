@@ -49,16 +49,17 @@ async function fetchTickets (){
         ticketContainer.appendChild(ticketDiv);
     });
 } catch (error) {
-    errorMessage.textContent = error.message; // Display the error message
-} finally {
-    // Task 4: Use finally to ensure cleanup
-    const loadingMessage = document.querySelector('#ticketContainer p');
+    errorMessage.textContent = error.message; // Display the error message (task 2)
+} 
+// Task 4: Use finally to ensure cleanup
+finally {
+    const loadingMessage = ticketContainer.getElementsByTagName('p')[0];
     if (loadingMessage) {
-        loadingMessage.style.display = 'none'; // Hide loading message
+        loadingMessage.remove();
+        }
     }
 }
-}
-
+fetchTickets();
 
 
 
