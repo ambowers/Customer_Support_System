@@ -6,7 +6,7 @@ async function fetchTickets (){
     const errorMessage = document.getElementById('errorMessage');
 
     //try/catch to handle any errors that occur during fetch
-    try{
+    try {
         ticketContainer.innerHTML = '<p> Loading tickets...</p>';
         const response = await fetch('https://jsonplaceholder.typicode.com/posts')
 
@@ -19,7 +19,7 @@ async function fetchTickets (){
             throw new Error('No unresolved tickets found');
         }
         errorMessage.textContent='';
-    }
+    
 
 // Task 3 display tickets dynamically on the page
     tickets.forEach(ticket => {
@@ -29,7 +29,7 @@ async function fetchTickets (){
         // display ticket id, customer name, issue description, and details
         const ticketId = document.createElement('h3');
         ticketId.textContent = `Ticket ID: ${ticket.id}`;
-        ticketId.appendChild(ticketId);
+        ticketDiv.appendChild(ticketId);
 
         // use userId field as placeholder
         const customerName = document.createElement('p');
@@ -39,6 +39,7 @@ async function fetchTickets (){
         //use title field as placeholder
         const issueDescription = document.createElement('p');
         issueDescription.textContent = `Issue Description: ${ticket.title}`;
+        ticketDiv.appendChild(issueDescription);
 
         //use body field as placeholder
         const details = document.createElement('p');
@@ -47,4 +48,19 @@ async function fetchTickets (){
 
         ticketContainer.appendChild(ticketDiv);
     });
-} 
+} catch (error) {
+    errorMessage.textContent = error.message; // Display the error message
+} finally {
+    // Task 4: Use finally to ensure cleanup
+    const loadingMessage = document.querySelector('#ticketContainer p');
+    if (loadingMessage) {
+        loadingMessage.style.display = 'none'; // Hide loading message
+    }
+}
+}
+
+
+
+
+
+
